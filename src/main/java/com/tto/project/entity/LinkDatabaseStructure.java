@@ -1,6 +1,7 @@
 package com.tto.project.entity;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -12,7 +13,16 @@ public class LinkDatabaseStructure {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column
     private String refcode;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "structure_id")
+    private CrystalStructures crystalStructures;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "csd_id")
+    private RefStructureDatabases refStructureDatabases;
+    @Column
+    private Timestamp created;
 
     public UUID getId() {
         return id;
@@ -28,5 +38,29 @@ public class LinkDatabaseStructure {
 
     public void setRefcode(String refcode) {
         this.refcode = refcode;
+    }
+
+    public CrystalStructures getCrystalStructures() {
+        return crystalStructures;
+    }
+
+    public void setCrystalStructures(CrystalStructures crystalStructures) {
+        this.crystalStructures = crystalStructures;
+    }
+
+    public RefStructureDatabases getRefStructureDatabases() {
+        return refStructureDatabases;
+    }
+
+    public void setRefStructureDatabases(RefStructureDatabases refStructureDatabases) {
+        this.refStructureDatabases = refStructureDatabases;
+    }
+
+    public Timestamp getCreated() {
+        return created;
+    }
+
+    public void setCreated(Timestamp created) {
+        this.created = created;
     }
 }

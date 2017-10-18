@@ -11,6 +11,7 @@ public class RefStructureDatabases {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @Column
     private String name;
 
     public Integer getId() {

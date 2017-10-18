@@ -13,7 +13,9 @@ public class Tto {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column
     private String refcode;
+    @Column
     private Character dimen;
     @ManyToOne(optional = false)
     @JoinColumn(name = "ttdid")
@@ -21,16 +23,21 @@ public class Tto {
     @ManyToOne(optional = false)
     @JoinColumn(name="ttolibraryid")
     private Ttolibrary ttolibrary;
+    @Column
     private Integer ttcode;
+    @Column
     private Integer z;
     @ManyToOne(optional = false)
     @JoinColumn(name = "reprtypecode")
     private RefRepresentationType reprtype;
+    @Column
     private Integer fwc;
     @ManyToOne(optional = false)
     @JoinColumn(name = "structureid")
-    private LinkDatabaseStructure structure;
+    private CrystalStructures structure;
+    @Column
     private Date created;
+    @Column
     private Short msrc;
 
     public UUID getId() {
@@ -97,11 +104,11 @@ public class Tto {
         this.reprtype = reprtype;
     }
 
-    public LinkDatabaseStructure getStructure() {
+    public CrystalStructures getStructure() {
         return structure;
     }
 
-    public void setStructure(LinkDatabaseStructure structure) {
+    public void setStructure(CrystalStructures structure) {
         this.structure = structure;
     }
 
@@ -112,8 +119,6 @@ public class Tto {
     public void setFwc(Integer fwc) {
         this.fwc = fwc;
     }
-
-
 
     public Date getCreated() {
         return created;

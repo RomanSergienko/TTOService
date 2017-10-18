@@ -1,7 +1,7 @@
 package com.tto.project.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 /**
@@ -13,12 +13,18 @@ public class CrystalStructures {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column(name = "cf_structural")
     private String cfStructural;
+    @Column(name = "cf_sum")
     private String cfSum;
+    @Column(name = "chem_name_systematic")
     private String chemNameSystematic;
-    private Date created;
+    @Column
+    private Timestamp created;
+    @Column
     private String remark;
-    private Date updated;
+    @Column
+    private Timestamp updated;
 
     public UUID getId() {
         return id;
@@ -52,11 +58,11 @@ public class CrystalStructures {
         this.chemNameSystematic = chemNameSystematic;
     }
 
-    public Date getCreated() {
+    public Timestamp getCreated() {
         return created;
     }
 
-    public void setCreated(Date created) {
+    public void setCreated(Timestamp created) {
         this.created = created;
     }
 
@@ -68,11 +74,11 @@ public class CrystalStructures {
         this.remark = remark;
     }
 
-    public Date getUpdated() {
+    public Timestamp getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(Timestamp updated) {
         this.updated = updated;
     }
 }

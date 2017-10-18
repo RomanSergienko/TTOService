@@ -13,9 +13,12 @@ public class Ttolibrary {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column
     private String name;
+    @Column
     private Date created;
-    private String user1;
+    @Column
+    private String user;
 
     public UUID getId() {
         return id;
@@ -41,11 +44,11 @@ public class Ttolibrary {
         this.created = created;
     }
 
-    public String getUser1() {
-        return user1;
+    public String getUser() {
+        return user;
     }
 
-    public void setUser1(String user1) {
-        this.user1 = user1;
+    public void setUser(String user1) {
+        this.user = user1;
     }
 }

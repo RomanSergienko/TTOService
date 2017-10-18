@@ -13,11 +13,17 @@ public class Ttd {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    @Column
     private String name;
+    @Column
     private Integer ttdcode;
+    @Column
     private String ts;
+    @Column
     private Integer numnodes;
+    @Column
     private Timestamp updated;
+    @Column
     private Timestamp created;
 
     public UUID getId() {

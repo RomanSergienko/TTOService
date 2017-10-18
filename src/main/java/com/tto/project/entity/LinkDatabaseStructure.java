@@ -1,4 +1,4 @@
-package com.example.test.entity;
+package com.tto.project.entity;
 
 import javax.persistence.*;
 import java.util.UUID;

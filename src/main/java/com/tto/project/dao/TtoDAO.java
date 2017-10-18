@@ -1,7 +1,7 @@
-package com.example.test.dao;
+package com.tto.project.dao;
 
-import com.example.test.entity.Ttd;
-import com.example.test.entity.Tto;
+import com.tto.project.entity.Ttd;
+import com.tto.project.entity.Tto;
 
 import java.util.List;
 

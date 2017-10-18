@@ -1,7 +1,7 @@
-package com.example.test.service;
+package com.tto.project.service;
 
-import com.example.test.entity.Ttd;
-import com.example.test.entity.Tto;
+import com.tto.project.entity.Ttd;
+import com.tto.project.entity.Tto;
 
 import java.util.List;
 

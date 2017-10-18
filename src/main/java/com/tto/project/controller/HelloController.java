@@ -1,4 +1,4 @@
-package com.example.test.controller;
+package com.tto.project.controller;
 
 /**
  * Created by RomanDev on 17.10.2017.

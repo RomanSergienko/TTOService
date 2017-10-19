@@ -135,4 +135,38 @@ public class Tto {
     public void setMsrc(Short msrc) {
         this.msrc = msrc;
     }
+
+    public Tto() {
+    }
+
+    public Tto(String refcode, Character dimen, Ttd ttd, Ttolibrary ttolibrary, Integer ttcode, Integer z,
+               RefRepresentationType reprtype, Integer fwc, CrystalStructures structure, Date created, Short msrc) {
+        this.refcode = refcode;
+        this.dimen = dimen;
+        this.ttd = ttd;
+        this.ttolibrary = ttolibrary;
+        this.ttcode = ttcode;
+        this.z = z;
+        this.reprtype = reprtype;
+        this.fwc = fwc;
+        this.structure = structure;
+        this.created = created;
+        this.msrc = msrc;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Tto tto = (Tto) o;
+
+        return id.equals(tto.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

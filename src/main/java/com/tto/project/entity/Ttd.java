@@ -81,4 +81,32 @@ public class Ttd {
     public void setCreated(Timestamp created) {
         this.created = created;
     }
+
+    public Ttd() {
+    }
+
+    public Ttd(String name, Integer ttdcode, String ts, Integer numnodes, Timestamp updated, Timestamp created) {
+        this.name = name;
+        this.ttdcode = ttdcode;
+        this.ts = ts;
+        this.numnodes = numnodes;
+        this.updated = updated;
+        this.created = created;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Ttd ttd = (Ttd) o;
+
+        return id.equals(ttd.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return id.hashCode();
+    }
 }

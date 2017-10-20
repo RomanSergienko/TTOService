@@ -10,7 +10,6 @@ import javax.persistence.*;
 public class RefRepresentationType {
     @Id
     @Column(name = "rep_code")
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer repCode;
     @Column(name = "rep_name")
     private String repName ;
@@ -38,6 +37,16 @@ public class RefRepresentationType {
     }
 
     public void setRepMethod(Integer repMethod) {
+        this.repMethod = repMethod;
+
+    }
+
+    public RefRepresentationType() {
+    }
+
+    public RefRepresentationType(Integer repCode, String repName, Integer repMethod) {
+        this.repCode = repCode;
+        this.repName = repName;
         this.repMethod = repMethod;
     }
 }

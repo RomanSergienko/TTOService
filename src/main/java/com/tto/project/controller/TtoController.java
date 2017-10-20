@@ -1,5 +1,6 @@
 package com.tto.project.controller;
 
+import com.tto.project.entity.RefRepresentationType;
 import com.tto.project.entity.Ttd;
 import com.tto.project.entity.Tto;
 import com.tto.project.service.TtoService;
@@ -24,10 +25,11 @@ public class TtoController {
     TtoService ttoService;
 
     @RequestMapping(value = "/ttd", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Ttd>> listTtd(@PathVariable("ttoid") UUID ttoid,
+    public ResponseEntity<List<Ttd>> listTtd(@PathVariable("ttoid") String ttdname,
                                              @PathVariable("reprtypecode")Integer reprtypecode,
-                                             @PathVariable("refcodes")List<String> refcodes){
-        List<Ttd> ttdList = ttoService.findTopology(ttoid, reprtypecode, refcodes);
+                                             @PathVariable("refcodes")List<String> refcodes,
+                                             @PathVariable("like")Boolean isUsedLike){
+        List<Ttd> ttdList = ttoService.findTopology(ttdname, reprtypecode, refcodes,isUsedLike);
         return new ResponseEntity<List<Ttd>>(ttdList, HttpStatus.OK);
     }
 
@@ -35,5 +37,11 @@ public class TtoController {
     public ResponseEntity<List<Tto>> listTto(@PathVariable("ttdUUID")UUID ttdUUID){
         List<Tto> ttoList = ttoService.findStuctures(ttdUUID);
         return new ResponseEntity<List<Tto>>(ttoList,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/repres", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<RefRepresentationType>> listRepresentationType(){
+        List<RefRepresentationType> repTypeList = ttoService.findAllRefType();
+        return new ResponseEntity<List<RefRepresentationType>>(repTypeList,HttpStatus.OK);
     }
 }

@@ -1,0 +1,75 @@
+<html>
+<head>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <title>TTO Service</title>
+    <link rel="stylesheet"
+          href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
+</head>
+<body  class="container"><br/>
+<h1>TTO Service</h1>
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label for="topology" class="col-sm-3 control-label">Topology </label>
+        <div class="col-sm-6">
+            <input type="text" id="topology" class="form-control"/>
+        </div>
+        <div class="col-sm-3">
+            <div class="checkbox">
+                <label><input type="checkbox" ng-model="student.maths"/>Use like</label>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="form-group">
+        <label for="lastName" class="col-sm-3 control-label">Representation</label>
+        <div class="col-sm-6">
+            <input type="text" id="representation" class="form-control"/>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastName" class="col-sm-3 control-label">RefCodes</label>
+        <div class="col-sm-6">
+            <input type="text" id="lastName" class="form-control"/>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    <div class="form-group">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Topology name</th>
+                <th>Occurence</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Search" class="btn btn-primary col-sm-offset-5"/>
+        <input type="submit" value="Read" class="btn"/><br/>
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>List of structures</tr>
+        <tr>
+            <th>N</th>
+            <th>RefCode</th>
+            <th>Z</th>
+            <th>fwc</th>
+            <th>Representation</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</form>
+</body>
+</html>

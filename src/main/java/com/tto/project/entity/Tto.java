@@ -17,14 +17,16 @@ public class Tto {
     private String refcode;
     @Column
     private Character dimen;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "ttdid")
-    private Ttd ttd;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "ttdid")
+//    private Ttd ttd;
+    @Column
+    private UUID ttdid;
     @ManyToOne(optional = false)
     @JoinColumn(name="ttolibraryid")
     private Ttolibrary ttolibrary;
     @Column
-    private Integer ttcode;
+    private Integer ttdcode;
     @Column
     private Integer z;
     @ManyToOne(optional = false)
@@ -64,12 +66,20 @@ public class Tto {
         this.dimen = dimen;
     }
 
-    public Ttd getTtd() {
-        return ttd;
+    public UUID getTtdid() {
+        return ttdid;
     }
 
-    public void setTtd(Ttd ttd) {
-        this.ttd = ttd;
+    public void setTtdid(UUID ttdid) {
+        this.ttdid = ttdid;
+    }
+
+    public Integer getTtdcode() {
+        return ttdcode;
+    }
+
+    public void setTtdcode(Integer ttdcode) {
+        this.ttdcode = ttdcode;
     }
 
     public Ttolibrary getTtolibrary() {
@@ -81,11 +91,11 @@ public class Tto {
     }
 
     public Integer getTtcode() {
-        return ttcode;
+        return ttdcode;
     }
 
     public void setTtcode(Integer ttcode) {
-        this.ttcode = ttcode;
+        this.ttdcode = ttcode;
     }
 
     public Integer getZ() {
@@ -139,13 +149,13 @@ public class Tto {
     public Tto() {
     }
 
-    public Tto(String refcode, Character dimen, Ttd ttd, Ttolibrary ttolibrary, Integer ttcode, Integer z,
+    public Tto(String refcode, Character dimen, UUID ttdid, Ttolibrary ttolibrary, Integer ttdcode, Integer z,
                RefRepresentationType reprtype, Integer fwc, CrystalStructures structure, Date created, Short msrc) {
         this.refcode = refcode;
         this.dimen = dimen;
-        this.ttd = ttd;
+        this.ttdid = ttdid;
         this.ttolibrary = ttolibrary;
-        this.ttcode = ttcode;
+        this.ttdcode = ttdcode;
         this.z = z;
         this.reprtype = reprtype;
         this.fwc = fwc;

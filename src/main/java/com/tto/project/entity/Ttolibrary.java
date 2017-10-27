@@ -17,7 +17,7 @@ public class Ttolibrary {
     private String name;
     @Column
     private Date created;
-    @Column
+    @Column(name = "user1")
     private String user;
 
     public UUID getId() {
@@ -48,7 +48,7 @@ public class Ttolibrary {
         return user;
     }
 
-    public void setUser(String user1) {
-        this.user = user1;
+    public void setUser(String user) {
+        this.user = user;
     }
 }

@@ -8,6 +8,11 @@
     <title>TTO Service</title>
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/webjars/bootstrap-select/1.12.0/css/bootstrap-select.min.css"/>
+    <style>
+        table tr.marked {
+            background-color: cornflowerblue;
+        }
+    </style>
     <script>
 
         var TOPOLOGY,
@@ -54,10 +59,10 @@
 
             $('#read').on('click', function (event) {
                 event.preventDefault();
-                //TODO
                 var params = {
-                    ttdUUID: "7c55aac0-c4d2-4c69-bf45-8fe0458f388e"
+                    ttdName: $('.marked').find('td').eq(0).text()
                 };
+                $('#structureTab').find("tr:gt(0)").remove();
                 var count = 1;
                 $.ajax({
                     url: '/tto',
@@ -76,13 +81,15 @@
                         $('#structureTab').append(trHTML);
                     }
                 });
-
-                $('#topologyTab').on('click', 'tbody tr', function (event) {
-                    var tr = $(this).parent().parent();
-                    var topologyUUID = $(tr).children().eq(0).html();
-                    alert("UUID строки: '" + topologyUUID + "'");
-                });
             });
+
+
+            $('#topologyTab').on('click', 'tbody tr', function (event) {
+                $('#topologyTab').find('tr').removeClass('marked');
+                $(this).addClass('marked');
+            });
+
+
         });
         function fillRepresentations() {
             var represent = $('#repres');
@@ -159,9 +166,9 @@
             <input type="submit" value="Read" class="btn" id="read"/><br/>
         </div>
     </form>
+    <h3>List of structures</h3>
     <table class="table table-bordered" id="structureTab">
         <thead>
-        <tr><h3>List of structures</h3></tr>
         <tr>
             <th>N</th>
             <th>RefCode</th>

@@ -1,3 +1,4 @@
+CREATE EXTENSION "uuid-ossp";
 SELECT uuid_generate_v4();
 
 DROP TABLE IF EXISTS ttolibrary;
@@ -45,13 +46,13 @@ CREATE TABLE IF NOT EXISTS ref_representation_type (
 
 DROP TABLE IF EXISTS tto;
 CREATE TABLE IF NOT EXISTS tto (
-  id           UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  id           UUID PRIMARY KEY,
   refcode      VARCHAR(8) NOT NULL,
   dimen        CHARACTER  NOT NULL,
   ttdid        UUID,
   ttolibraryid UUID,
-  ttdcode      INT
-  z INT,
+  ttdcode      INT,
+  z            INT,
   reprtypecode INT,
   fwc          INT,
   structureid  UUID,
@@ -64,7 +65,7 @@ CREATE TABLE IF NOT EXISTS tto (
   ON UPDATE NO ACTION,
   CONSTRAINT fk_ttolibrary
   FOREIGN KEY (ttolibraryid)
-  REFERENCES ttd (id)
+  REFERENCES ttolibrary (id)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION,
   CONSTRAINT fk_reprtypecode
@@ -81,11 +82,11 @@ CREATE TABLE IF NOT EXISTS tto (
 
 DROP TABLE IF EXISTS link_database_structure;
 CREATE TABLE IF NOT EXISTS link_database_structure (
-  id UUID PRIMARY KEY,
-  refcode VARCHAR(8),
+  id           UUID PRIMARY KEY,
+  refcode      VARCHAR(8),
   structure_id UUID,
-  csd_id INT,
-  created TIMESTAMP,
+  csd_id       INT,
+  created      TIMESTAMP,
   CONSTRAINT fk_structure
   FOREIGN KEY (structure_id)
   REFERENCES crystal_structures (id)

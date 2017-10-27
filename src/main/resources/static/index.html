@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="utf-8">
     <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.js"></script>
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
     <script src="/webjars/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
@@ -13,43 +15,76 @@
                 REPRES,
                 REFCODES;
 
-                $(document).ready(function () {
-                    fillRepresentations();
+        $(document).ready(function () {
+            fillRepresentations();
 
-                    $('#search').on("click",function (event) {
-                        event.preventDefault();
+            $('#search').on("click", function (event) {
+                event.preventDefault();
 
-                        TOPOLOGY = $('#topology').val();
-                        if ($('#uselike').is(":checked")){
-                            USELIKE = true;
-                        }else{
-                            USELIKE = false;
-                        }
-                        REFCODES = $('#refcodes').val();
-                        REPRES = $('#repres').val();
-                        var params = {
-                            ttdname:TOPOLOGY,
-                            reprtypecode:1,
-                            refcodes:REFCODES,
-                            like: USELIKE
+                $("#topologyTab").find("tr:gt(0)").remove();
+                TOPOLOGY = $('#topology').val();
+                if ($('#uselike').is(":checked")) {
+                    USELIKE = true;
+                } else {
+                    USELIKE = false;
+                }
+                REFCODES = $('#refcodes').val();
+                REPRES = $('#repres').val();
+                var params = {
+                    ttdname: TOPOLOGY,
+                    reprtypecode: 1,
+                    refcodes: REFCODES,
+                    like: USELIKE
 
-                        };
-                        $.ajax({
-                            url: '/ttd',
-                            type: 'get',
-                            dataType: 'json',
-                            data: params,
-                            success: function(data) {
-                                $.each(data, function (i, item) {
-//                                    alert(item.id);
-                                });
-                            }
-                        })
-                    });
+                };
+                $.ajax({
+                    url: '/ttd',
+                    type: 'get',
+                    dataType: 'json',
+                    data: params,
+                    success: function (data) {
+                        var trHTML = '';
+                        $.each(data, function (i, item) {
+                            trHTML += '<tr><td>' + item.name + '</td><td>' + '10' + '</td></tr>';
+                        });
+                        $('#topologyTab').append(trHTML);
+                    }
+                })
+            });
 
+            $('#read').on('click', function (event) {
+                event.preventDefault();
+                //TODO
+                var params = {
+                    ttdUUID: "7c55aac0-c4d2-4c69-bf45-8fe0458f388e"
+                };
+                var count = 1;
+                $.ajax({
+                    url: '/tto',
+                    type: 'get',
+                    dataType: 'json',
+                    data: params,
+                    success: function (data) {
+                        var trHTML = '';
+                        $.each(data, function (i, item) {
+                            trHTML += '<tr><td>' + count++ + '</td>' +
+                                    '<td>' + item.refcode + '</td>' +
+                                    '<td>' + item.z + '</td>' +
+                                    '<td>' + item.fwc + '</td>' +
+                                    '<td>' + item.dimen + '</td></tr>';
+                        });
+                        $('#structureTab').append(trHTML);
+                    }
                 });
 
-        function fillRepresentations(){
+                $('#topologyTab').on('click', 'tbody tr', function (event) {
+                    var tr = $(this).parent().parent();
+                    var topologyUUID = $(tr).children().eq(0).html();
+                    alert("UUID строки: '" + topologyUUID + "'");
+                });
+            });
+        });
+        function fillRepresentations() {
             var represent = $('#repres');
             represent.find('option')
                     .remove()
@@ -57,8 +92,8 @@
                     .append($("<option>"));
             $.get('/repres', function (json) {
                 $.each(json, function (i, value) {
-                    represent.append(
-                                    $("<option>").text(value.repCode + " "+value.repName).attr('value',value.repCode)
+                            represent.append(
+                                    $("<option>").text(value.repCode + " " + value.repName).attr('value', value.repCode)
                             );
                         }
                 );
@@ -105,7 +140,7 @@
             <div class="col-sm-3"></div>
         </div>
         <div class="form-group">
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="topologyTab">
                 <thead>
                 <tr>
                     <th>Topology name</th>
@@ -121,10 +156,10 @@
         </div>
         <div class="form-group">
             <input type="submit" value="Search" class="btn btn-primary col-sm-offset-5" id="search"/>
-            <input type="submit" value="Read" class="btn"/><br/>
+            <input type="submit" value="Read" class="btn" id="read"/><br/>
         </div>
     </form>
-    <table class="table table-bordered">
+    <table class="table table-bordered" id="structureTab">
         <thead>
         <tr><h3>List of structures</h3></tr>
         <tr>

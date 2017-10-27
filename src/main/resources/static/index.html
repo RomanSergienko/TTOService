@@ -1,23 +1,79 @@
 <html>
 <head>
+    <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.js"></script>
     <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
     <script src="/webjars/bootstrap-select/1.12.0/js/bootstrap-select.min.js"></script>
-
-    <!--<script type="text/javascript" src="webjars/angularjs/1.3.8/angular.min.js"></script>-->
-    <!--<script type="text/javascript" src="webjars/angularjs/1.3.8/angular-resource.min.js"></script>-->
-    <!--<script type="text/javascript" src="webjars/angularjs/1.3.8/angular-route.min.js"></script>-->
-    <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.min.js"></script>
-
     <title>TTO Service</title>
     <link rel="stylesheet" href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/webjars/bootstrap-select/1.12.0/css/bootstrap-select.min.css"/>
+    <script>
+
+        var TOPOLOGY,
+                USELIKE,
+                REPRES,
+                REFCODES;
+
+                $(document).ready(function () {
+                    fillRepresentations();
+
+                    $('#search').on("click",function (event) {
+                        event.preventDefault();
+
+                        TOPOLOGY = $('#topology').val();
+                        if ($('#uselike').is(":checked")){
+                            USELIKE = true;
+                        }else{
+                            USELIKE = false;
+                        }
+                        REFCODES = $('#refcodes').val();
+                        REPRES = $('#repres').val();
+                        var params = {
+                            ttdname:TOPOLOGY,
+                            reprtypecode:1,
+                            refcodes:REFCODES,
+                            like: USELIKE
+
+                        };
+                        $.ajax({
+                            url: '/ttd',
+                            type: 'get',
+                            dataType: 'json',
+                            data: params,
+                            success: function(data) {
+                                $.each(data, function (i, item) {
+//                                    alert(item.id);
+                                });
+                            }
+                        })
+                    });
+
+                });
+
+        function fillRepresentations(){
+            var represent = $('#repres');
+            represent.find('option')
+                    .remove()
+                    .end()
+                    .append($("<option>"));
+            $.get('/repres', function (json) {
+                $.each(json, function (i, value) {
+                    represent.append(
+                                    $("<option>").text(value.repCode + " "+value.repName).attr('value',value.repCode)
+                            );
+                        }
+                );
+            }, 'json');
+        }
+
+
+    </script>
 </head>
 <h1>TTO Service</h1>
 
 <body class="container"><br/>
 
 <div>
-    <form class="form-horizontal" role="form">
+    <form class="form-horizontal" id="subform">
         <div class="form-group">
             <label for="topology" class="col-sm-3 control-label">Topology </label>
             <div class="col-sm-6">
@@ -25,28 +81,26 @@
             </div>
             <div class="col-sm-3">
                 <div class="checkbox">
-                    <label><input type="checkbox" />Use like</label>
+                    <label><input type="checkbox" id="uselike"/>Use like</label>
                 </div>
 
             </div>
 
         </div>
         <div class="form-group">
-            <label for="lastName" class="col-sm-3 control-label">Representation</label>
+            <label for="repres" class="col-sm-3 control-label">Representation</label>
             <div class="col-sm-6">
-                <select class="form-control">
-                    <option>Representation 1</option>
-                    <option>Representation 2</option>
-                    <option>Representation 3</option>
+                <select class="form-control" id="repres" name="repres">
+
                 </select>
             </div>
             <div class="col-sm-3"></div>
         </div>
 
         <div class="form-group">
-            <label for="lastName" class="col-sm-3 control-label">RefCodes</label>
+            <label for="refcodes" class="col-sm-3 control-label">RefCodes</label>
             <div class="col-sm-6">
-                <input type="text" id="lastName" class="form-control" />
+                <input type="text" id="refcodes" class="form-control"/>
             </div>
             <div class="col-sm-3"></div>
         </div>
@@ -66,25 +120,25 @@
             </table>
         </div>
         <div class="form-group">
-            <input type="submit" value="Search" class="btn btn-primary col-sm-offset-5" />
+            <input type="submit" value="Search" class="btn btn-primary col-sm-offset-5" id="search"/>
             <input type="submit" value="Read" class="btn"/><br/>
         </div>
-        <table class="table table-bordered">
-            <thead>
-            <tr><h3>List of structures</h3></tr>
-            <tr>
-                <th>N</th>
-                <th>RefCode</th>
-                <th>Z</th>
-                <th>fwc</th>
-                <th>Representation</th>
-            </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-        </table>
     </form>
+    <table class="table table-bordered">
+        <thead>
+        <tr><h3>List of structures</h3></tr>
+        <tr>
+            <th>N</th>
+            <th>RefCode</th>
+            <th>Z</th>
+            <th>fwc</th>
+            <th>Representation</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

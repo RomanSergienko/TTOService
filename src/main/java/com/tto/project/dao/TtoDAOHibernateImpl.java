@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by RomanDev on 19.10.2017.
@@ -55,10 +54,10 @@ public class TtoDAOHibernateImpl implements TtoDAO{
     }
 
     @Override
-    public List<Tto> findStuctures(UUID ttdUUID) {
+    public List<Tto> findStuctures(String ttdName) {
         Session session = sessionFactory.getCurrentSession();
         Criteria criteria = session.createCriteria(Tto.class);
-        criteria.add(Restrictions.eq("ttdid",ttdUUID));
+        //criteria.add(Restrictions.eq("ttdid",ttdUUID));
         List<Tto> result = criteria.list();
         return result;
     }

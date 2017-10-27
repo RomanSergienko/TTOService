@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by RomanDev on 19.10.2017.
@@ -29,8 +28,8 @@ public class TtoServiceImpl implements TtoService {
     }
     @Transactional
     @Override
-    public List<Tto> findStuctures(UUID ttdUUID) {
-        return ttoDAO.findStuctures(ttdUUID);
+    public List<Tto> findStuctures(String ttdName) {
+        return ttoDAO.findStuctures(ttdName);
     }
     @Transactional
     @Override

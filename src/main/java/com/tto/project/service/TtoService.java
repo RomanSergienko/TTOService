@@ -5,7 +5,6 @@ import com.tto.project.entity.Ttd;
 import com.tto.project.entity.Tto;
 
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by RomanDev on 18.10.2017.
@@ -22,10 +21,10 @@ public interface TtoService {
 
     /**
      * Возращает список кодов материалов с данной топологией
-     * @param ttdUUID
+     * @param ttdName
      * @return
      */
-    List<Tto> findStuctures(UUID ttdUUID);
+    List<Tto> findStuctures(String ttdName);
 
     /**
      * Возвращает все справочники
